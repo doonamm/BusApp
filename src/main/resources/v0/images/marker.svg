@@ -1,8 +1,6 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="body_1" width="47" height="35">
-
-<g transform="matrix(0.068359375 0 0 0.068359375 10.375 -0)">
-    <path d="M384 192C 384 279.4 267 435 215.7 499.2C 203.4 514.5 180.6 514.5 168.3 499.2C 116.1 435 0 279.4 0 192C 0 85.96 85.96 0 192 0C 298 0 384 85.96 384 192z" stroke="none" fill="#16DB65" fill-rule="nonzero" />
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26px" height="35px" viewBox="0 0 26 34" version="1.1">
+<g id="surface1">
+<path style="fill-rule:nonzero;fill:rgb(8.627451%,85.882353%,39.607843%);fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(100%,100%,100%);stroke-opacity:1;stroke-miterlimit:4;" d="M 384 192 C 384 279.411765 267 435 215.711538 499.176471 C 203.423077 514.470588 180.576923 514.470588 168.288462 499.176471 C 116.076923 435 0 279.411765 0 192 C 0 85.941176 85.961538 0 192 0 C 297.980769 0 384 85.941176 384 192 Z M 384 192 " transform="matrix(0.0677083,0,0,0.0664062,0,0)"/>
 </g>
 </svg>

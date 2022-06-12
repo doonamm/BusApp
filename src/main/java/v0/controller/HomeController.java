@@ -3,7 +3,6 @@ package v0.controller;
 import com.dlsc.gmapsfx.GoogleMapView;
 import com.dlsc.gmapsfx.MapComponentInitializedListener;
 import com.dlsc.gmapsfx.javascript.event.MapStateEventType;
-import com.dlsc.gmapsfx.javascript.event.StateEventHandler;
 import com.dlsc.gmapsfx.javascript.object.*;
 import com.dlsc.gmapsfx.shapes.Polyline;
 import com.dlsc.gmapsfx.shapes.PolylineOptions;
@@ -15,18 +14,15 @@ import javafx.scene.layout.AnchorPane;
 import v0.Config;
 import v0.MapServices;
 
-import javax.xml.transform.Result;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
-public class HomeController implements Initializable, MapComponentInitializedListener, StateEventHandler {
+public class HomeController implements Initializable, MapComponentInitializedListener {
     @FXML
     protected AnchorPane mapContainer;
     @FXML
@@ -38,9 +34,9 @@ public class HomeController implements Initializable, MapComponentInitializedLis
 
     protected GoogleMapView googleMapView;
     private GoogleMap googleMap;
-
     private Connection connection;
     private Statement statement;
+    private List<LatLong> stopPositions;
 
     public void showNearbyStops(){
 
@@ -67,56 +63,21 @@ public class HomeController implements Initializable, MapComponentInitializedLis
 
         googleMapView.toBack();
         googleMapView.addMapInitializedListener(this);
+
+        initMarker();
     }
 
-    @Override
-    public void mapInitialized() {
-        MapOptions options = new MapOptions();
-        options.center(Config.mapDefaultLocation)
-                .mapType(MapTypeIdEnum.ROADMAP)
-                .styleString(Config.mapStyle)
-                .zoom(Config.mapDefaultZoom)
-                .zoomControl(false)
-                .streetViewControl(false)
-                .mapTypeControl(false);
+    public void initMarker(){
+        stopPositions = new ArrayList<>();
 
-        googleMap = googleMapView.createMap(options);
-        googleMap.addStateEventHandler(MapStateEventType.dragend, this);
-    }
-
-    @Override
-    public void handle(){
-        if(googleMap.getZoom() < 15){
-            return;
-        };
-
-        System.out.println(googleMap.getZoom());
-        System.out.println(googleMap.getCenter());
-
-        LatLongBounds box = googleMap.getBounds();
+        String queryStops = "SELECT * FROM stops";
 
         try{
-            Collection<Marker> markers = new ArrayList<>();
-
-            String queryStops = "SELECT * FROM stops";
             ResultSet results = statement.executeQuery(queryStops);
+
             while (results.next()){
                 LatLong stop = new LatLong(results.getDouble("lat"), results.getDouble("lng"));
-                if(box.contains(stop)){
-                    System.out.println("Add marker!");
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(stop)
-                            .icon(Config.mapMarkerImage);
-
-                    Marker marker = new Marker(markerOptions);
-                    markers.add(marker);
-                }
-            }
-
-            googleMap.clearMarkers();
-            if(markers.size() > 0){
-                System.out.println(markers.size());
-                googleMap.addMarkers(markers);
+                stopPositions.add(stop);
             }
         }
         catch (Exception err){
@@ -124,15 +85,55 @@ public class HomeController implements Initializable, MapComponentInitializedLis
         }
     }
 
+    @Override
+    public void mapInitialized() {
+        MapOptions options = new MapOptions();
+        options.center(Config.mapDefaultLocation)
+                .mapType(MapTypeIdEnum.ROADMAP)
+                .styleString(Config.mapStyle2)
+                .zoom(Config.mapDefaultZoom)
+                .zoomControl(false)
+                .streetViewControl(false)
+                .mapTypeControl(false);
+
+        googleMap = googleMapView.createMap(options);
+        googleMap.addStateEventHandler(MapStateEventType.dragend, this::showAroundStops);
+        googleMap.addStateEventHandler(MapStateEventType.zoom_changed, this::showAroundStops);
+
+        showAroundStops();
+    }
+    public  void showAroundStops(){
+        googleMap.clearMarkers();
+        if(googleMap.getZoom() < 16){
+            return;
+        };
+        System.out.println("Zoom: " + googleMap.getZoom());
+
+        LatLongBounds box = googleMap.getBounds();
+
+        Collection<Marker> markers = new LinkedList<>();
+
+        for (LatLong stop : stopPositions) {
+            if(box.contains(stop)){
+                MarkerOptions markerOptions = new MarkerOptions().position(stop).icon(Config.mapMarkerImage);
+                markers.add(new Marker(markerOptions));
+            }
+        }
+
+        googleMap.addMarkers(markers);
+    }
+
     @FXML
-    public void handleClickTarget(){
+    public void goToCurrentPosition(){
         GeolocationResult result = MapServices.geolocation();
 
         if(result != null){
             System.out.println("Success");
             LatLng location = result.location;
             googleMap.setCenter(new LatLong(location.lat, location.lng));
-            googleMap.setZoom(15);
+            googleMap.setZoom(16);
+
+            showAroundStops();
         }
         else{
             System.out.println("Can not find location");
