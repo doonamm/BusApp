@@ -109,7 +109,6 @@ public class HomeController implements Initializable, MapComponentInitializedLis
                             .icon(Config.mapMarkerImage);
 
                     Marker marker = new Marker(markerOptions);
-
                     markers.add(marker);
                 }
             }
