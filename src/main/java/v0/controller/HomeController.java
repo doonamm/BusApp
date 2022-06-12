@@ -57,7 +57,7 @@ public class HomeController implements Initializable, MapComponentInitializedLis
             err.printStackTrace();
         }
 
-        googleMapView = new GoogleMapView(Config.mapLanguage, "");
+        googleMapView = new GoogleMapView(Config.mapLanguage, Config.apiKey);
         mapContainer.getChildren().add(googleMapView);
 
         AnchorPane.setTopAnchor(googleMapView, 0.0);
@@ -74,7 +74,7 @@ public class HomeController implements Initializable, MapComponentInitializedLis
         MapOptions options = new MapOptions();
         options.center(Config.mapDefaultLocation)
                 .mapType(MapTypeIdEnum.ROADMAP)
-//                .styleString(Config.mapStyle)
+                .styleString(Config.mapStyle)
                 .zoom(Config.mapDefaultZoom)
                 .zoomControl(false)
                 .streetViewControl(false)
@@ -105,7 +105,8 @@ public class HomeController implements Initializable, MapComponentInitializedLis
                 if(box.contains(stop)){
                     System.out.println("Add marker!");
                     MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(stop);
+                    markerOptions.position(stop)
+                            .icon(Config.mapMarkerImage);
 
                     Marker marker = new Marker(markerOptions);
 

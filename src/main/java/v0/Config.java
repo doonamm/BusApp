@@ -12,6 +12,7 @@ public class Config {
     public final static String mapLanguage = "en-EN";
     public final static LatLong mapDefaultLocation = new LatLong(10.870244162717086, 106.80304914633336);
     public final static int mapDefaultZoom = 16;
+    public final static String mapMarkerImage = "https://raw.githubusercontent.com/doonamm/BusApp/master/src/main/resources/v0/images/marker.svg";
     public final static String DB_URL = "jdbc:mysql://localhost:3306/busapp?user=root&password=&useUnicode=true&characterEncoding=utf8";
     public final static String driver = "com.mysql.cj.jdbc.Driver";
 }
