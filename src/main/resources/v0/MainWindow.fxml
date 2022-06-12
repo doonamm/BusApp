@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" styleClass="main" stylesheets="@style/MainStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="v0.controller.MainController">
+   <children>
+      <AnchorPane id="show-container" layoutX="74.0" prefHeight="500.0" prefWidth="809.0" stylesheets="@style/MainStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <fx:include fx:id="loveTab" source="LoveTab.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <fx:include fx:id="routesTab" source="RoutesTab.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <fx:include fx:id="homeTab" source="HomeTab.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="500.0" prefWidth="70.0" styleClass="side-bar" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="500.0" prefWidth="74.0" styleClass="tab-btn-container">
+               <children>
+                  <Button fx:id="homeTabBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleChangeTab" prefHeight="70.0" prefWidth="74.0" styleClass="tab-btn">
+                     <graphic>
+                        <FontAwesomeIconView fontSmoothingType="LCD" glyphName="MAP" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="routesTabBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleChangeTab" prefHeight="70.0" prefWidth="74.0" styleClass="tab-btn">
+                     <graphic>
+                        <FontAwesomeIconView fontSmoothingType="LCD" glyphName="BUS" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="loveTabBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleChangeTab" prefHeight="70.0" prefWidth="74.0" styleClass="tab-btn">
+                     <graphic>
+                        <FontAwesomeIconView fontSmoothingType="LCD" glyphName="HEART" />
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+   </children>
+</AnchorPane>

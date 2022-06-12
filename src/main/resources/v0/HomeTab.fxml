@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="home" prefHeight="500.0" prefWidth="830.0" stylesheets="@style/MainStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="v0.controller.HomeController">
+    <children>
+        <AnchorPane fx:id="mapContainer" style="-fx-background-color: cadetblue;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button id="target" alignment="CENTER" contentDisplay="CENTER" layoutX="776.0" layoutY="431.0" mnemonicParsing="false" onAction="#handleClickTarget" prefHeight="32.0" prefWidth="30.0" textAlignment="CENTER" AnchorPane.bottomAnchor="29.0" AnchorPane.rightAnchor="14.0">
+               <graphic>
+                  <FontAwesomeIconView fontSmoothingType="LCD" glyphName="MAP_MARKER" size="17" strokeLineCap="ROUND" strokeLineJoin="ROUND" />
+               </graphic>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
+               </effect>
+            </Button>
+            <TextField id="search-field" layoutX="287.0" layoutY="14.0" maxHeight="26.0" maxWidth="375.0" minHeight="26.0" minWidth="238.0" prefHeight="30.0" prefWidth="256.0" promptText="Search place..." AnchorPane.leftAnchor="287.0" AnchorPane.rightAnchor="287.0" AnchorPane.topAnchor="14.0">
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
+               </effect>
+            </TextField>
+         </children></AnchorPane>
+    </children>
+</AnchorPane>

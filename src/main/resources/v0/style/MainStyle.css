@@ -1,0 +1,51 @@
+.main{
+    -fx-background-color: #fff;
+}
+.side-bar{
+    -fx-background-color: #fff;
+}
+.tab-btn{
+    -fx-background-color: #fff;
+    -fx-cursor: pointer;
+}
+.tab-btn.selected{
+    -fx-background-color: #eee;
+}
+FontAwesomeIconView{
+    -fx-scale-x: 2;
+    -fx-scale-y: 2;
+    -fx-fill: #324A5F;
+}
+#home{
+    -fx-background-color: #BFDBF7;
+}
+#routes{
+    -fx-background-color: #94C9A9;
+}
+#love{
+    -fx-background-color: #C49792;
+}
+.route-btn{
+    -fx-min-width: 80px;
+    -fx-max-width: 200px;
+    -fx-pref-height: 100px;
+}
+#target{
+    -fx-background-radius: 5em;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-max-width: 40px;
+    -fx-max-height: 40px;
+    -fx-background-color: #fff;
+    -fx-background-insets: 0px;
+    -fx-padding: 0px;
+
+}
+#search-field{
+    -fx-background-radius: 5em;
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+    -fx-background-color: #fff;
+    -fx-background-insets: 0px;
+    -fx-padding: 0px 10px;
+}
