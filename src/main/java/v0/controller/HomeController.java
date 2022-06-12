@@ -44,6 +44,7 @@ public class HomeController implements Initializable, MapComponentInitializedLis
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //init connection
         try{
             Class.forName(Config.driver);
             connection = DriverManager.getConnection(Config.DB_URL);
@@ -53,6 +54,7 @@ public class HomeController implements Initializable, MapComponentInitializedLis
             err.printStackTrace();
         }
 
+        //init map
         googleMapView = new GoogleMapView(Config.mapLanguage, Config.apiKey);
         mapContainer.getChildren().add(googleMapView);
 
@@ -63,8 +65,6 @@ public class HomeController implements Initializable, MapComponentInitializedLis
 
         googleMapView.toBack();
         googleMapView.addMapInitializedListener(this);
-
-        initMarker();
     }
 
     public void initMarker(){
@@ -79,6 +79,8 @@ public class HomeController implements Initializable, MapComponentInitializedLis
                 LatLong stop = new LatLong(results.getDouble("lat"), results.getDouble("lng"));
                 stopPositions.add(stop);
             }
+
+            System.out.println("@@@" + stopPositions.size());
         }
         catch (Exception err){
             System.out.println(err.getMessage());
@@ -100,6 +102,7 @@ public class HomeController implements Initializable, MapComponentInitializedLis
         googleMap.addStateEventHandler(MapStateEventType.dragend, this::showAroundStops);
         googleMap.addStateEventHandler(MapStateEventType.zoom_changed, this::showAroundStops);
 
+        initMarker();
         showAroundStops();
     }
     public  void showAroundStops(){
@@ -119,6 +122,8 @@ public class HomeController implements Initializable, MapComponentInitializedLis
                 markers.add(new Marker(markerOptions));
             }
         }
+
+        System.out.println("Stops count: " + markers.size());
 
         googleMap.addMarkers(markers);
     }
